@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger-ui-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -8,11 +8,11 @@ async function bootstrap() {
     origin: '*',
   });
   const config = new DocumentBuilder()
-      .setTitle('GymOne API')
-      .setDescription('GymOne API description')
-      .setVersion('0.01a')
-      .addTag('gym')
-      .build();
+    .setTitle('Jenkins test API 145')
+    .setDescription('GymOne API description')
+    .setVersion('0.01a')
+    .addTag('gym')
+    .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
   await app.listen(3000);
