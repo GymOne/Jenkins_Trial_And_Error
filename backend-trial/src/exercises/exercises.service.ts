@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { Model } from 'mongoose';
 import { Exercise } from './entities/exercise.entity';
+import { GetExerciseDto } from './dto/GetExerciseDto';
 
 @Injectable()
 export class ExercisesService {
@@ -15,7 +16,15 @@ export class ExercisesService {
     });
   }
   async findAllByUserId() {
-    return await this.exerciseModel.find().exec();
+    const listExercise = await this.exerciseModel.find().exec();
+    //console.log(listExercise);
+    const listSimple: GetExerciseDto[] = [];
+    listExercise.map((ex) => {
+      const h: GetExerciseDto = { name: ex.name };
+      listSimple.push(h);
+    });
+    console.log(listSimple);
+    return listSimple;
   }
 
   async findOneById(id: string) {
